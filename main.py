@@ -1,7 +1,7 @@
 '''This code is part of the FBSDE solver project, which implements a global direct solver for forward-backward 
-stochastic differential equations (FBSDEs). It uses TensorFlow for numerical computations and is designed to 
-solve FBSDEs with a specific configuration defined in the `FBSDE_Parameters_new` module. The code also includes
- functionality for logging, plotting results, and saving configurations.
+stochastic differential equations (FBSDEs). It uses feed-forward neural networks implemented in TensorFlow for 
+numerical computations and is designed to solve FBSDEs with a specific configuration defined in the 
+`FBSDE_Parameters_new` module. The code also includes functionality for logging, plotting results, and saving configurations.
  
  Please refer to the PhD thesis of Charu Shardul (HAL link: https://theses.hal.science/tel-04627360v1) for details.
  '''
