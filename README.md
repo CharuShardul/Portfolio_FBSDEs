@@ -17,9 +17,9 @@ X_0 &= x_0, \quad Y_T = g(X_T)
 $$
 
 where:
-- $ X_t $ is the forward process (e.g., wealth, portfolio state)
-- $ (Y_t, Z_t) $ are the backward processes (e.g., adjoint processes for an optimization problem)
-- $ W_t $ is a Brownian motion
+- $X_t$ is the forward process (e.g., wealth, portfolio state)
+- $(Y_t, Z_t)$ are the backward processes (e.g., adjoint processes for an optimization problem)
+- $W_t$ is a Brownian motion
 - $(b, \sigma, f, g)$ are problem-specific functions
 
 For the **McKean-Vlasov** (mean-field) case, the functions $(b, \sigma, f, g)$ may depend on the law of $ X_t $ in general.
@@ -97,4 +97,4 @@ Follow these steps to run the code:
 
 
 
-In case of difficulties, please contact: shardul744@gmail.com 
+For any clarifications, please contact me at: shardul744@gmail.com 
