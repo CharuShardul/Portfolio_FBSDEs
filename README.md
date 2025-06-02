@@ -80,8 +80,6 @@ The main configuration file is [`configs/FBSDE_config_1d.json`](configs/FBSDE_co
 | `batch_size`      | Training batch size                              | `32`                 |
 | `valid_size`      | Validation batch size                            | `256`                |
 | `logging_frequency`| Logging frequency (iterations)                  | `100`                |
-| `dtype`           | Data type                                        | `"float32"`          |
-| `verbose`         | Verbosity flag                                   | `true`               |
 
 ---
 
