@@ -1,0 +1,84 @@
+{
+  "eqn_config": {
+    "_comment": "Standard FBSDE with fixed law dependent part",
+    "eqn_name": "FBSDE",
+    "explicit_solution": false,
+    "r": 0.026,
+    "rho": 0.2,
+    "gamma": [
+      400.0,
+      8.317
+    ],
+    "X_dim": 2,
+    "Y_dim": 2,
+    "W_dim": 1,
+    "X_init": [
+      1.0,
+      8.317
+    ],
+    "lamb": 10.0,
+    "t_grid_size": 6,
+    "total_time": 6.0,
+    "fict_play_num": 2,
+    "nu_support": [
+      0.92,
+      0.928,
+      0.936,
+      0.944,
+      0.952,
+      0.96,
+      0.968,
+      0.976,
+      0.984,
+      0.992,
+      1.0,
+      1.008,
+      1.016,
+      1.024,
+      1.032,
+      1.04,
+      1.048,
+      1.056,
+      1.064,
+      1.072,
+      1.08
+    ]
+  },
+  "net_config": {
+    "y_init_range": [
+      0.0,
+      0.1
+    ],
+    "lr_values": [
+      0.01,
+      0.007,
+      0.005,
+      0.003,
+      0.001,
+      0.0003,
+      0.0001,
+      5e-05,
+      3e-05,
+      1e-05,
+      5e-06
+    ],
+    "lr_boundaries": [
+      100,
+      500,
+      1000,
+      1500,
+      2000,
+      3000,
+      3500,
+      4000,
+      4500,
+      5000
+    ],
+    "num_iterations": 2000,
+    "batch_size": 32,
+    "valid_size": 256,
+    "logging_frequency": 100,
+    "dtype": "float32",
+    "verbose": true
+  }
+}
