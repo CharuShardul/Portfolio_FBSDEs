@@ -316,7 +316,7 @@ class Subnet(tf.keras.Model):
             )
             for _ in range(len(num_hiddens)+2)]
         self.dense_layers = [tf.keras.layers.Dense(num_hiddens[i],
-                                                   activation=None,
+                                                   activation=None, #'relu',
                                                    kernel_initializer=None)#'he_normal')
                              for i in range(len(num_hiddens))
                              ]
