@@ -30,8 +30,6 @@ class TargDist:
         return norm.pdf(x, loc=self.mu*T, scale=self.sigma*np.sqrt(T))
 
 
-
-
 pi = TargDist()
 T = 0.5
 k_supp = [0.96, 0.98, 1.0, 1.02, 1.04]

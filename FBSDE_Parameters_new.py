@@ -46,7 +46,8 @@ class FBSDE(Base):
         self.alpha = alpha
         self.k = np.linspace(0.95, 1.05, 11)
 
-        # Necessary conversions
+        # Conversion of drift and volatility from daily to yearly values
+        # b_sig_dat is a dictionary with keys 'drift', 'volatility' and 'S_init'
         self.gamma = np.array(eqn_config.gamma)
         self.b = 365.0*np.array(b_sig_dat.drift)
         self.sig = np.sqrt(365.0)*np.array(b_sig_dat.volatility)
@@ -179,26 +180,6 @@ class FBSDE(Base):
                                     axis=1, keepdims=False))
 
 
-    '''def Y0_MC(self, data, LDx):
-        dW = data[0][:, 1:] - data[0][:, :-1]
-        S = data[1]
-        T_grid = self.delta_t * np.array([[t for t in range(self.eqn_config.t_grid_size)]
-                                          for _ in range(self.net_config.valid_size)])
-        exp_factor = np.e**((-self.rho*T_grid) + [tf.reduce_sum(self.delta_t*self.aV(S)[:, :t], axis=1) for t in range(self.eqn_config.t_grid_size)])
-
-        LDx_hat = LDx * tf.exp(
-            -self.rho * T_grid + np.array(tf.reduce_sum(self.aV(S[:, :i]) * self.delta_t, axis=1, keepdims=True)
-                                          for i in range(self.eqn_config.t_grid_size - 1)))
-        return tf.reduce_mean(tf.reduce_sum(self.L(data)),
-                              axis=1, keepdims=True)
-
-    def Y1_MC(self, data, LDx):
-        dW = data[0][:, 1:] - data[0][:, :-1]
-        S = data[1]
-        T_grid = self.delta_t * np.array([[[t] for t in range(self.eqn_config.t_grid_size)]
-                                          for _ in range(self.net_config.valid_size)])
-        return 0
-    '''
 
 #S = np.random.uniform(low=0.0, high=1.0, size=[2, 5])
 #S = np.array([[0.353, 0], [0.765, 0]])
