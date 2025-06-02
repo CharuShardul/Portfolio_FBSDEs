@@ -1,3 +1,8 @@
+'''This file defines the FBSDE class for solving Forward-Backward Stochastic Differential Equations (FBSDEs)
+   with specific parameters from our portfolio optimization problem. It uses the config file "FBSDE_config_1d.json",
+    market parameters from "Real_data_GBM.py" and "saved_processes_simdata.py" and the target distribution from
+    "targ_dist.py" for setting up the FBSDE parameters.'''
+
 import numpy as np
 import tensorflow as tf
 from targ_dist import TargDist
@@ -115,10 +120,6 @@ class FBSDE(Base):
              + self.alpha * self.ldx(t, x[0], zeta) \
              + lamb_til*(-2*x[0]/(1+(x[0])**2)**2)
 
-        #print("Y", y[0].shape)
-        #print("Z", z[0].shape)
-        #print("Ldx", self.ldx(t, x[0], Exp_x).shape)
-        #print('f0', np.shape(f0))
         #f1 = [y[0]*self.ad(s)[i] + tf.reduce_sum(z[0]*self.bd(s)[i], axis=1, keepdims=True) - self.rho*y[1][i]
         #      for i in range(self.eqn_config.W_dim)]
 
@@ -178,23 +179,6 @@ class FBSDE(Base):
         S = data[1]
         return tf.exp(tf.reduce_sum((self.bV(S)*dW - 0.5*tf.square(self.bV(S))*self.delta_t)[:, :t],
                                     axis=1, keepdims=False))
-
-
-
-#S = np.random.uniform(low=0.0, high=1.0, size=[2, 5])
-#S = np.array([[0.353, 0], [0.765, 0]])
-#f = FBSDE(config.eqn_config, b_sig_dat)
-#print(f.ad(S))
-
-#x = np.array([[1.0, 2.0, 3.0, 4.0]])
-#f = FBSDE(config.eqn_config, b_sig_dat)
-#print(f.ldx(1.0, x))
-
-#A = FBSDE(config.eqn_config, b_sig_dat)
-#print()
-
-
-
 
 
 class FBSDE_verification(Base):

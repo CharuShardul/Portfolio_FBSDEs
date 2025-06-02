@@ -1,3 +1,6 @@
+'''In this file, we define the FBSDE solver class that uses a neural network to solve the FBSDEs.
+This class is designed to work with a specific configuration defined in "FBSDE_Parameters_new.py".'''
+
 import numpy as np
 import tensorflow as tf
 import logging
@@ -5,8 +8,6 @@ import time
 import munch
 import json
 import FBSDE_Parameters_new as FP
-
-#DELTA_CLIP = 50.0
 
 '''
 conf_path = "configs\FBSDE_config.json"
@@ -19,7 +20,6 @@ config = munch.munchify(config)
 b_sig_dat = munch.munchify(b_sig_dat)
 equation = FP.FBSDE
 '''
-
 
 class FBSDEsolver(object):
     def __init__(self, config, equation):
@@ -73,11 +73,6 @@ class FBSDEsolver(object):
         start_time = time.time()
         training_history = []
         valid_data = self.Sample(self.net_config.valid_size)
-
-        '''for step in range(5):  # just a few steps for debugging
-            print("Before:", self.model.y_init_0.numpy())
-            self.train_step(self.Sample(self.net_config.batch_size))
-            print("After:", self.model.y_init_0.numpy())'''
 
         for step in range(self.net_config.num_iterations + 1):
             if step % self.net_config.logging_frequency == 0:
@@ -193,7 +188,8 @@ class fullNN(tf.keras.Model):
 
         y = (y0, y1)
         z = (z0, z1)
-        '''x = tf.concat((x0, x1), axis=-1)
+        ''' high-dimensional case
+        x = tf.concat((x0, x1), axis=-1)
         print("x", x.shape)
         y = tf.concat((y0, y1), axis=-1)
         print("y", y.shape)
@@ -326,13 +322,16 @@ class Subnet(tf.keras.Model):
         pass
 
     def call(self, t, s, z, training):
+        # alternative case
         #z = tf.concat([x, y], axis=1)
         #z = tf.concat([x0, y0], axis=1)
         #z = self.bn_layers[0](z, training=training)
+
+        # 1-d case
         z = tf.concat([t, s, z], axis=1)
         for i in range(len(self.dense_layers)-1):
             z = self.dense_layers[i](z)
-            #z = self.bn_layers[i+1](z, training=training)                        # test after relu
+            #z = self.bn_layers[i+1](z, training=training)           
             z = tf.nn.relu(z)
         z = self.dense_layers[-1](z)
         #z = self.bn_layers[-1](z, training)

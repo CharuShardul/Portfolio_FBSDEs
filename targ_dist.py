@@ -1,3 +1,7 @@
+'''This code implements a moving target distribution for the wealth distribution which calculates the parameter p_k using
+ the Black-Scholes formula for European put options, and provides methods to compute the probability density function (pdf)
+ of the target distribution.'''
+
 import numpy as np
 from scipy.stats import norm as norm
 import matplotlib.pyplot as plt
