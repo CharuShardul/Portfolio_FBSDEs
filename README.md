@@ -1,6 +1,6 @@
 # Long Term Dynamic Portfolio Optimization using Infinite Horizon McKean-Vlasov FBSDEs
 
-This project implements a test-case for the **global direct solver** approach for a McKean-Vlasov Forward-Backward Stochastic Differential Equation (FBSDE) using deep neural networks (TensorFlow/Keras). It is designed for long-term dynamic portfolio optimization problems, as described in the [PhD thesis of Charu Shardul](https://theses.hal.science/tel-04627360v1).
+This project implements a test-case for the **global direct solver** approach for a McKean-Vlasov Forward-Backward Stochastic Differential Equation (FBSDE) using deep neural networks (TensorFlow/Keras). It is designed for the long-term dynamic portfolio optimization problem, as described in the [PhD thesis of Charu Shardul](https://theses.hal.science/tel-04627360v1).
 
 ---
 
@@ -61,7 +61,7 @@ The main configuration file is [`configs/FBSDE_config_1d.json`](configs/FBSDE_co
 | `eqn_name`        | Equation class name                              | `"FBSDE"`            |
 | `r`               | Interest rate                                    | `0.026`              |
 | `rho`             | Discount factor                                  | `0.2`                |
-| `gamma`           | Risk aversion parameters                         | `[400.0, 8.317]`     |
+| `gamma`           | Initial portfolio weights                         | `[400.0, 8.317]`     |
 | `X_dim`           | State dimension                                  | `2`                  |
 | `Y_dim`           | Backward variable dimension                      | `2`                  |
 | `W_dim`           | Brownian motion dimension                        | `1`                  |
@@ -69,15 +69,13 @@ The main configuration file is [`configs/FBSDE_config_1d.json`](configs/FBSDE_co
 | `lamb`            | Smoothing parameter for law term                 | `10.0`               |
 | `t_grid_size`     | Number of time steps per unit time               | `6`                  |
 | `total_time`      | Total time horizon                               | `6.0`                |
-| `fict_play_num`   | Fictitious play iterations                       | `2`                  |
-| `nu_support`      | Support for target distribution (law term)       | `[0.92, ..., 1.08]`  |
+
+| `nu_support`      | Support for target distribution   | `[0.92, ..., 1.08]`  |
 
 ### Neural Network Parameters (`net_config`)
 | Parameter         | Description                                      | Example Value         |
 |-------------------|--------------------------------------------------|----------------------|
 | `y_init_range`    | Initial range for \( Y_0 \)                      | `[0.0, 0.1]`         |
-| `lr_values`       | Learning rate schedule values                    | `[1e-2, ..., 5e-6]`  |
-| `lr_boundaries`   | Iteration boundaries for learning rate changes   | `[100, 500, ...]`    |
 | `num_iterations`  | Number of training iterations                    | `2000`               |
 | `batch_size`      | Training batch size                              | `32`                 |
 | `valid_size`      | Validation batch size                            | `256`                |
@@ -96,3 +94,7 @@ Follow these steps to run the code:
 
    ```bash
    python main.py --config_path configs/FBSDE_config_1d.json --stock_data Data_files/b_and_sig.json --exp_name my_experiment
+
+
+
+In case of difficulties, please contact: shardul744@gmail.com 
