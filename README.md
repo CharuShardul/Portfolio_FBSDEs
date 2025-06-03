@@ -26,7 +26,23 @@ For the **McKean-Vlasov** (mean-field) case, the functions $(b, \sigma, f, g)$ m
 
 ## Portfolio Optimization FBSDE
 
-The specific FBSDE solved in this code is:
+Consider a portfolio consisting of $N$ risky assets and a risk-free asset which satisfy the following SDEs and ODE respectively,
+$$
+\begin{aligned}
+ d S^i_t &= S^i_t\left(b_t^i dt + \sum_{j=1}^m\sigma_t^{i,j} dW_t^j  \right),\ \text{for } i\in\{1, 2, \dots, N\},\\
+d S^0_t &= S^0_t r_t dt.
+\end{aligned}
+$$
+
+For a given initial endowment $U_{t=0} = U_0$ and the portfolio given by $\{U_t - \sum_{i=1}^N X^i_t S^i_t, X^1_t, \dots, X^N_t \}$, define the relative wealth process $X^0= \frac{U_t}{\sum_{i=0}^N S^i_t\gamma^i}$ where the portfolio given by $\gamma^i$ is called the reference portfolio. 
+
+Our portfolio optimization criterion is based on a certain 'distance' from a target distribution parametrized by $(p_k)_{k\in \mathbb R}$. We want to minimize a cost functional of the form,
+
+$$
+J^\lambda(q) = \mathbb E\left[\int_0^\infty e^{-\rho t}\left(g(X_t, q_t) + \int_{-\infty}^\infty  \Big[\mathbb E[k-X^0_t]^\lambda_+ - p_k\Big]^\lambda_+ d\nu(k)\right) dt \right].
+$$
+
+The corresponding McKean-Vlasov FBSDE solved in this code is:
 
 $$
 \begin{aligned}
@@ -46,7 +62,17 @@ f_1 &= Y_t^0 \alpha_d(S_t) + Z_t^0 \beta_d(S_t) - \rho Y_t^1
 \end{aligned}
 $$
 
-The process $(\zeta_t)_{t\in [0, T]}$ encodes the law-dependence through Lion's derivative (see equation 3.4.3 in the thesis)
+The process $(\zeta_t)_{t\in [0, T]}$ encodes the law-dependence through Lion's derivative (see equation 3.4.3 in the thesis).
+
+### Variables' description (`Global_direct_solver.py`)
+| Parameter         | Description                                      | Example Value         |
+|-------------------|--------------------------------------------------|----------------------|
+| `x0`               | Relative wealth process                              | starting value `1.0`            |
+| `x1`               | Number of units of risky asset                       | starting value `8.3`              |
+| `y0`             | Adjoint variable                            | Target terminal value `0.0`                |
+| `y1`            |  Negative trading speed of the risky asset                   |  Target terminal value `0.0`|
+| `zeta`          | Lion's derivative of the distance between distributions| eg. `0.36` |
+| `alpha`         | Penalty on the distance between distributions       |  eg. `2.0`         |
 
 
 ---
@@ -61,7 +87,7 @@ The main configuration file is [`configs/FBSDE_config_1d.json`](configs/FBSDE_co
 | `eqn_name`        | Equation class name                              | `"FBSDE"`            |
 | `r`               | Interest rate                                    | `0.026`              |
 | `rho`             | Discount factor                                  | `0.2`                |
-| `gamma`           | Initial portfolio weights                         | `[400.0, 8.317]`     |
+| `gamma`           | Initial portfolio weights                        | `[400.0, 8.317]`    |
 | `X_dim`           | State dimension                                  | `2`                  |
 | `Y_dim`           | Backward variable dimension                      | `2`                  |
 | `W_dim`           | Brownian motion dimension                        | `1`                  |
@@ -69,8 +95,7 @@ The main configuration file is [`configs/FBSDE_config_1d.json`](configs/FBSDE_co
 | `lamb`            | Smoothing parameter for law term                 | `10.0`               |
 | `t_grid_size`     | Number of time steps per unit time               | `6`                  |
 | `total_time`      | Total time horizon                               | `6.0`                |
-
-| `nu_support`      | Support for target distribution   | `[0.92, ..., 1.08]`  |
+| `nu_support`      | Support for target distribution                  | `[0.92, ..., 1.08]`  |
 
 ### Neural Network Parameters (`net_config`)
 | Parameter         | Description                                      | Example Value         |
