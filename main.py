@@ -3,6 +3,12 @@
 feed-forward neural networks implemented in TensorFlow for numerical computations and is designed to solve FBSDEs 
 with a specific configuration defined in the `FBSDE_Parameters_new` module. The code also includes functionality for
  logging, plotting results, and saving configurations.
+
+ It gives two outputs: 
+ 1. Averages of relative wealth X0(ratio of controlled vs static portfolio wealth), trading speed -Y1, number of units X1 of the risky asset and the
+ auxilliary variable Y0. Averaging is done across the generated scenarios.
+ 2. A sample of 6 trajectories for relative wealth, trading speed and portfolio weights along with the distance between the distribution of the relative wealth 
+ and the target distribution.
  
  This code was developed as part of my PhD at University of Bordeaux under the supervision of Prof. Adrien Richou and 
  Prof. Emmanuel Gobet. Please refer to the PhD thesis of Charu Shardul (HAL link: https://theses.hal.science/tel-04627360v1) 
@@ -132,7 +138,7 @@ def main(argv):
     for a in alpha:
         fig.savefig(r"Numerical_experiments\Global_direct_solver\Means\alpha_{}.png".format(a))
 
-    fig, axs = plt.subplots(4, 2, figsize=(24, 21), dpi=75)
+    fig, axs = plt.subplots(3, 2, figsize=(24, 21), dpi=75)
     
     # Plotting some sample trajectories
     for s in range(6):
@@ -144,14 +150,14 @@ def main(argv):
         axs[1, 0].set_title("Trading speed trajectories")
         axs[1, 1].plot(x_axis, trajec[0][1][s])
         axs[1, 1].set_title("Portfolio process trajectories")
-        axs[2, 0].plot(x_axis, trajec[0][4][s])
-        axs[2, 0].set_title("Z^0_t")
-        axs[2, 1].plot(x_axis, trajec[0][5][s])
-        axs[2, 1].set_title("Z^1_t")
-        axs[3, 0].plot(x_axis, trajec[0][6][s])
-        axs[3, 0].set_title("L-derivative trajectories")
-    axs[3, 1].plot(x_axis, distance)
-    axs[3, 1].set_title("Distance b/w measures")
+        #axs[2, 0].plot(x_axis, trajec[0][4][s])
+        #axs[2, 0].set_title("Z^0_t")
+        #axs[2, 1].plot(x_axis, trajec[0][5][s])
+        #axs[2, 1].set_title("Z^1_t")
+        axs[2, 0].plot(x_axis, trajec[0][6][s])
+        axs[2, 0].set_title("L-derivative trajectories")
+    axs[2, 1].plot(x_axis, distance)
+    axs[2, 1].set_title("Distance b/w measures")
 
     test_time = time.time() - test_time
     print("Plotting time:", test_time)
