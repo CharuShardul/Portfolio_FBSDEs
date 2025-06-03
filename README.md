@@ -27,6 +27,7 @@ For the **McKean-Vlasov** (mean-field) case, the functions $(b, \sigma, f, g)$ m
 ## Portfolio Optimization FBSDE
 
 Consider a portfolio consisting of $N$ risky assets and a risk-free asset which satisfy the following SDEs and ODE respectively,
+
 $$
 \begin{aligned}
  d S^i_t &= S^i_t\left(b_t^i dt + \sum_{j=1}^m\sigma_t^{i,j} dW_t^j  \right),\ \text{for } i\in\{1, 2, \dots, N\},\\
