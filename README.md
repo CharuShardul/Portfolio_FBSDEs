@@ -58,7 +58,7 @@ The drivers \( f_0, f_1 \) are given by:
 
 $$
 \begin{aligned}
-f_0 &= Y_t^0 \alpha_V(S_t) + Z_t^0 \beta_V(S_t) - \rho Y_t^0 + \alpha \, \zeta_t \\
+f_0 &= Y_t^0 \alpha_V(S_t) + Z_t^0 \beta_V(S_t) - \rho Y_t^0 + \alpha \ \zeta_t \\
 f_1 &= Y_t^0 \alpha_d(S_t) + Z_t^0 \beta_d(S_t) - \rho Y_t^1
 \end{aligned}
 $$
